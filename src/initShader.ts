@@ -16,6 +16,7 @@ const initShader = (
 
   gl.attachShader(program, vertexShader);
   gl.attachShader(program, fragmentShader);
+
   gl.linkProgram(program);
   gl.useProgram(program);
   return program;

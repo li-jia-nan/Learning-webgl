@@ -1,12 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import initShader from "./initShader";
 import styles from "./app.module.scss";
 
 const VERTEX_SHADER = /*glsl*/ `
-  attribute vec4 a_Position;
+  attribute vec4 aPosition;
   void main() {
-    gl_Position = a_Position;
+    gl_Position = aPosition;
     gl_PointSize = 10.0;
   }
 `;
@@ -19,8 +18,8 @@ const FRAGMENT_SHADER = /*glsl*/ `
 
 const App: React.FC = () => {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const gl = canvasRef.current?.getContext("webgl");
   React.useEffect(() => {
+    const gl = canvasRef.current?.getContext("webgl");
     if (gl) {
       const program = initShader(gl, VERTEX_SHADER, FRAGMENT_SHADER);
       const aPosition = gl.getAttribLocation(program, "aPosition");
